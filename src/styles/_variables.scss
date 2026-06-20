@@ -1,0 +1,31 @@
+// transitions
+$trans-default: 0.3s ease;
+$trans-long: 0.6s ease;
+
+:root {
+    // palette
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+
+    --color-gray-700: #5c5c5c;
+
+    --color-sky-200: #E0FAFF;
+
+    --color-blue-300: #B7E1FF;
+    --color-blue-500: #45B1FF;
+    --color-blue-600: #0095FF;
+    --color-blue-700: #008CEF;
+
+    --color-green-300: #A1FFA4;
+    --color-green-500: #00EE08;
+    --color-green-600: #00D507;
+    --color-green-700: #00CE07;
+
+    --color-red-300: #FF8080;
+    --color-red-500: #FF0000;
+    --color-red-600: #DF0000;
+    --color-red-700: #D70000;
+
+    // semantic
+    --color-text-primary: var(--color-gray-700);
+}
