@@ -4,7 +4,8 @@ import './AuthForm.scss'
 
 const AuthForm = (props) => {
     const {
-        className = ''
+        className = '',
+        isLogin,
     } = props
 
     return (
@@ -30,7 +31,7 @@ const AuthForm = (props) => {
                 className='auth-form__button'
                 type='submit'
             >
-                Войти
+                {isLogin ? 'Войти' : 'Зарегистрироваться'}
             </Button>
         </form>
     )
