@@ -1,0 +1,21 @@
+@use '@/styles/core.scss' as * ;
+
+.button {
+    @include reset-button;
+    @include typography(600, 1, 18px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding-inline: 20px;
+    border-radius: 10px;
+    background-color: var(--color-aqua);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color $trans-default;
+
+    @include hover {
+        background-color: var(--color-aqua-hover);
+    }
+}
