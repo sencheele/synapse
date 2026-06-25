@@ -1,16 +1,23 @@
-import { useState } from 'react'
-import './AuthPage.scss'
+import { useEffect, useState } from 'react'
 import AuthForm from './components/AuthForm'
 import loginIllustration from './images/login-illustration.webp'
 import registerIllustration from './images/register-illustration.webp'
+import './AuthPage.scss'
 
 const AUTH_MODE = {
     LOGIN: 'login',
     REGISTER: 'register',
 }
 
+const STORAGE_KEYS = {
+    USERS: 'users',
+}
+
 const AuthPage = () => {
     const [authMode, setAuthMode] = useState(AUTH_MODE.LOGIN)
+    const [users, setUsers] = useState(JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)) || [])
+    const [errorMessage, setErrorMessage] = useState(null)
+
 
     const isLogin = authMode === AUTH_MODE.LOGIN
 
@@ -18,12 +25,37 @@ const AuthPage = () => {
         ? loginIllustration
         : registerIllustration
 
+
+    useEffect(() => {
+        localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users))
+    }, [users])
+
+
+    const clearErrorMessage = () => {
+        setErrorMessage(null)
+    }
+
     const toggleAuthMode = () => {
         setAuthMode(prevMode =>
             prevMode === AUTH_MODE.LOGIN
                 ? AUTH_MODE.REGISTER
                 : AUTH_MODE.LOGIN
         )
+
+        clearErrorMessage()
+    }
+
+    const handleRegister = (authData) => {
+        const isUserExisting = users.some(user => user.email === authData.email)
+
+        if (isUserExisting) {
+            setErrorMessage('Пользователь с таким email уже существует')
+            return
+        }
+
+        const newUser = {...authData, id: Date.now()}
+
+        setUsers(prevUsers => [...prevUsers, newUser])
     }
 
     return (
@@ -45,7 +77,13 @@ const AuthPage = () => {
                             </p>
                         </div>
 
-                        <AuthForm className='authorization__form' isLogin={isLogin} />
+                        <AuthForm
+                            className='authorization__form'
+                            isLogin={isLogin}
+                            onRegister={handleRegister}
+                            setErrorMessage={setErrorMessage}
+                            onClearError={clearErrorMessage}
+                        />
 
                         <p className='authorization__switch'>
                             {isLogin ? 'Нет профиля?' : 'Есть профиль?'}
@@ -58,6 +96,15 @@ const AuthPage = () => {
                                 {isLogin ? 'Зарегистрироваться' : 'Войти'}
                             </button>
                         </p>
+
+                        {errorMessage &&
+                            <div className="authorization__error-message">
+                                <svg>
+                                    <use href='/public/sprite.svg#attention'></use>
+                                </svg>
+                                {errorMessage}
+                            </div>
+                        }
                     </div>
                 </div>
             </section>

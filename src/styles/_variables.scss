@@ -16,10 +16,14 @@ $trans-long: 0.6s ease;
     --color-aqua-400: #20C3C4;
     --color-aqua-500: #169899;
 
+    --color-red-500: #E31C1C;
+
     // semantic
     --color-bg: var(--color-gray-900);
     --color-text-primary: var(--color-gray-100);
 
     --color-aqua: var(--color-aqua-500);
     --color-aqua-hover: var(--color-aqua-400);
+
+    --color-error: var(--color-red-500);
 }
