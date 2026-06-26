@@ -7,7 +7,7 @@ const AuthForm = (props) => {
     const {
         className = '',
         isLogin,
-        onRegister,
+        onAuth,
         setErrorMessage,
         onClearError,
     } = props
@@ -19,19 +19,22 @@ const AuthForm = (props) => {
 
         const email = form.email.value
         const password = form.password.value
-        const confirmPassword = form.confirmPassword.value
 
-        if (!isLogin && password !== confirmPassword) {
-            setErrorMessage('Пароли не совпадают')
-            return
+        if (!isLogin) {
+            const confirmPassword = form.confirmPassword.value
+
+            if (password !== confirmPassword) {
+                setErrorMessage('Пароли не совпадают')
+                return
+            }
         }
 
-        const data = {
+        const authData = {
             email,
             password,
         }
 
-        onRegister(data)
+        onAuth(authData)
     }
 
     return (

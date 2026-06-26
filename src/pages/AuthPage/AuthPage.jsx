@@ -58,6 +58,17 @@ const AuthPage = () => {
         setUsers(prevUsers => [...prevUsers, newUser])
     }
 
+    const handleLogin = (authData) => {
+        const user = users.find(user => user.email === authData.email)
+
+        if (!user || user.password !== authData.password) {
+            setErrorMessage('Неверный логин или пароль')
+            return
+        }
+
+        console.log('Пользователь успешно авторизован')
+    }
+
     return (
         <main className="main">
             <section className="authorization">
@@ -80,7 +91,7 @@ const AuthPage = () => {
                         <AuthForm
                             className='authorization__form'
                             isLogin={isLogin}
-                            onRegister={handleRegister}
+                            onAuth={isLogin ? handleLogin : handleRegister}
                             setErrorMessage={setErrorMessage}
                             onClearError={clearErrorMessage}
                         />
