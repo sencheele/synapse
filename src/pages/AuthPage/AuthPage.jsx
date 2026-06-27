@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import AuthForm from './components/AuthForm'
 import loginIllustration from './images/login-illustration.webp'
 import registerIllustration from './images/register-illustration.webp'
+import { STORAGE_KEYS } from '@/shared/constants/storageKeys'
 import './AuthPage.scss'
 
 const AUTH_MODE = {
@@ -9,14 +11,12 @@ const AUTH_MODE = {
     REGISTER: 'register',
 }
 
-const STORAGE_KEYS = {
-    USERS: 'users',
-}
-
 const AuthPage = () => {
     const [authMode, setAuthMode] = useState(AUTH_MODE.LOGIN)
-    const [users, setUsers] = useState(JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)) || [])
+    const [users, setUsers] = useState(() => JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)) || [])
     const [errorMessage, setErrorMessage] = useState(null)
+
+    const navigate = useNavigate()
 
 
     const isLogin = authMode === AUTH_MODE.LOGIN
@@ -56,6 +56,13 @@ const AuthPage = () => {
         const newUser = {...authData, id: Date.now()}
 
         setUsers(prevUsers => [...prevUsers, newUser])
+
+        localStorage.setItem(
+            STORAGE_KEYS.CURRENT_USER,
+            JSON.stringify(newUser)
+        )
+
+        navigate('/app')
     }
 
     const handleLogin = (authData) => {
@@ -66,7 +73,12 @@ const AuthPage = () => {
             return
         }
 
-        console.log('Пользователь успешно авторизован')
+        localStorage.setItem(
+            STORAGE_KEYS.CURRENT_USER,
+            JSON.stringify(user)
+        )
+
+        navigate('/app')
     }
 
     return (
@@ -92,8 +104,8 @@ const AuthPage = () => {
                             className='authorization__form'
                             isLogin={isLogin}
                             onAuth={isLogin ? handleLogin : handleRegister}
-                            setErrorMessage={setErrorMessage}
-                            onClearError={clearErrorMessage}
+                            onError={setErrorMessage}
+                            onFormChange={clearErrorMessage}
                         />
 
                         <p className='authorization__switch'>

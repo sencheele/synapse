@@ -8,8 +8,8 @@ const AuthForm = (props) => {
         className = '',
         isLogin,
         onAuth,
-        setErrorMessage,
-        onClearError,
+        onError,
+        onFormChange,
     } = props
 
     const handleSubmit = (e) => {
@@ -24,7 +24,7 @@ const AuthForm = (props) => {
             const confirmPassword = form.confirmPassword.value
 
             if (password !== confirmPassword) {
-                setErrorMessage('Пароли не совпадают')
+                onError('Пароли не совпадают')
                 return
             }
         }
@@ -41,7 +41,7 @@ const AuthForm = (props) => {
         <form
             className={`auth-form ${className}`}
             onSubmit={handleSubmit}
-            onChange={onClearError}
+            onChange={onFormChange}
         >
             <FormField
                 className='auth-form__field'
