@@ -4,16 +4,22 @@ import AuthPage from '@/pages/AuthPage'
 import GamesPage from '@/pages/GamesPage'
 import ProfilePage from '@/pages/ProfilePage'
 import LeaderboardPage from '@/pages/LeaderboardPage'
+import HomeRedirect from './HomeRedirect'
 import ProtectedRoute from './ProtectedRoute'
+import GuestRoute from './GuestRoute'
 
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <Navigate to='/auth' replace />
+        element: <HomeRedirect />
     },
     {
         path: 'auth',
-        element: <AuthPage />,
+        element: (
+            <GuestRoute>
+                <AuthPage />
+            </GuestRoute>
+        ),
     },
     {
         path: 'app',
