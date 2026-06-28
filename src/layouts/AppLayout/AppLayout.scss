@@ -1,0 +1,12 @@
+@use '@/styles/core.scss' as * ;
+
+.layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    align-items: start;
+
+    &__sidebar {
+        position: sticky;
+        top: 0;
+    }
+}

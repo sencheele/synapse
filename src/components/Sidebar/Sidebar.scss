@@ -1,0 +1,53 @@
+@use '@/styles/core.scss' as * ;
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    height: 100dvh;
+    padding: 30px 20px;
+    border-right: 1px solid var(--color-aqua-border);
+    background-color: var(--color-bg);
+
+    &__logo {
+        margin-right: 20px;
+    }
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        margin-inline: -20px;
+
+        &-link {
+            @include typography(400, 1, 20px);
+
+            display: flex;
+            align-items: center;
+            column-gap: 15px;
+            padding: 15px 20px;
+            transition: color $trans-default, background-color $trans-default;
+
+            svg {
+                display: block;
+                aspect-ratio: 1;
+                width: 40px;
+                fill: var(--color-text-primary);
+                transition: fill $trans-default;
+            }
+
+            &.is-active {
+                font-weight: 500;
+                color: var(--color-aqua);
+                pointer-events: none;
+
+                svg {
+                    fill: var(--color-aqua);
+                }
+            }
+
+            @include hover {
+                background-color: var(--color-aqua-100-alpha-20);
+            }
+        }
+    }
+}

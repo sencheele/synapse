@@ -1,22 +1,11 @@
-import { Outlet, NavLink } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
+import Sidebar from '@/components/Sidebar'
 import './AppLayout.scss'
 
 const AppLayout = () => {
     return (
         <div className="layout">
-            <aside className="sidebar">
-                <NavLink to='games'>
-                    Игры
-                </NavLink>
-
-                <NavLink to='profile'>
-                    Профиль
-                </NavLink>
-
-                <NavLink to='leaderboard'>
-                    Рекорды
-                </NavLink>
-            </aside>
+            <Sidebar />
 
             <main className="main">
                 <Outlet />
