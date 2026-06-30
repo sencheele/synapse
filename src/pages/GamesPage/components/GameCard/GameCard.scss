@@ -1,0 +1,122 @@
+@use '@/styles/core.scss' as * ;
+
+.game-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+    padding: 40px 20px 40px 40px;
+    border: 1px solid var(--color-aqua-100-alpha-10);
+    border-radius: 30px;
+    background-color: var(--color-aqua-100-alpha-10);
+
+    @include vp-1680 {
+        column-gap: 25px;
+        padding: 30px 20px 30px 30px;
+        border-radius: 25px;
+    }
+
+    &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        aspect-ratio: 1;
+        width: 70px;
+        border-radius: 50%;
+        background-color: var(--color-green-500-alpha-15);
+
+        svg {
+            display: block;
+            aspect-ratio: 1;
+            width: 60%;
+            fill: var(--color-green-500);
+        }
+
+        @include vp-1680 {
+            width: 65px;
+        }
+    }
+
+    &__information {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        max-width: 300px;
+        margin-right: auto;
+
+        @include vp-1680 {
+            max-width: 250px
+        }
+    }
+
+    &__title {
+        @include typography(600, 1, 24px);
+
+        @include vp-1680 {
+            font-size: 22px;
+        }
+    }
+
+    &__description {
+        @include typography(400, 1.4, 16px, var(--color-gray-300));
+
+        @include vp-1680 {
+            font-size: 15px;
+        }
+    }
+
+    &__stats {
+        display: flex;
+        flex-direction: column;
+        row-gap: 12px;
+
+        &-label {
+            @include typography(400, 1.2, 14px, var(--color-gray-300));
+        }
+
+        &-value {
+            @include typography(600, 1, 24px, var(--color-green-500));
+
+            white-space: nowrap;
+        }
+    }
+
+    &__button {
+        @include reset-button;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        aspect-ratio: 1;
+        width: 40px;
+        margin-left: auto;
+
+        &::before {
+            content: "";
+            display: block;
+            aspect-ratio: 1;
+            width: 15px;
+            // border-top: 2px solid var(--color-text-primary);
+            // border-right: 2px solid var(--color-text-primary);
+            border-top: 2px solid transparent;
+            border-right: 2px solid transparent;
+            transform: translateX(calc(-50% - 20px)) rotate(45deg);
+            transition: border-color $trans-long, transform $trans-long;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+        }
+
+        @include hover {
+            &::before {
+                // border-color: var(--color-green-500);
+                border-color: var(--color-gray-300);
+                transform: translateX(-50%) rotate(45deg);
+            }
+        }
+    }
+}

@@ -1,4 +1,9 @@
 @use '/src/styles/core.scss' as * ;
 
 .container {
+    padding-inline: 100px;
+
+    @include vp-1680 {
+        padding-inline: 50px;
+    }
 }

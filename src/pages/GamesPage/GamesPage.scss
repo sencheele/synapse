@@ -1,0 +1,27 @@
+@use '@/styles/core.scss' as * ;
+
+.games {
+    min-height: 100dvh;
+
+    &__title {
+        @include typography(600, 1, 48px);
+
+        margin-bottom: 20px
+    }
+
+    &__description {
+        @include typography(400, 1.6, 18px);
+
+        margin-bottom: 40px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+
+        @include vp-1680 {
+            gap: 25px;
+        }
+    }
+}
